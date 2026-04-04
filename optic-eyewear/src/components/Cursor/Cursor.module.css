@@ -1,0 +1,18 @@
+/* Cursor.module.css — dark */
+.dot {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--blue); border-radius: 50%;
+  top: 0; left: 0; pointer-events: none;
+  z-index: 9999; transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .3s;
+  mix-blend-mode: screen;
+}
+.ring {
+  position: fixed; width: 32px; height: 32px;
+  border: 1px solid rgba(26,86,255,0.45); border-radius: 50%;
+  top: 0; left: 0; pointer-events: none;
+  z-index: 9998; transform: translate(-50%,-50%);
+  transition: opacity .3s, transform .05s linear;
+}
+.expanded { width: 18px; height: 18px; background: var(--cyan); mix-blend-mode: screen; }
+.ringHide { opacity: 0; transform: translate(-50%,-50%) scale(1.6); }

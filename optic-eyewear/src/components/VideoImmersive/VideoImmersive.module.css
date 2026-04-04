@@ -1,0 +1,179 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #030303;
+  padding: 8rem 2vw 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  z-index: 3;
+}
+
+.header {
+  position: relative;
+  width: 100%;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.logoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+}
+
+.ticketPattern {
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+  font-size: 0.8rem;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 30%;
+}
+
+.logoCenter {
+  text-align: center;
+  margin-top: -1rem;
+}
+
+.logoCenter h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.05em;
+}
+
+.logoCenter h1 span {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.origin {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  background: #fff;
+  color: #000;
+  border: none;
+  font-family: 'Syne', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 60vh 40vh;
+  gap: 1vw;
+  width: 100%;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panelEye {
+  grid-column: 1 / span 1;
+}
+
+.panelVideo {
+  grid-column: 2 / span 2;
+}
+
+.panelBotLeft {
+  grid-column: 1 / span 1;
+}
+
+.panelBotMid {
+  grid-column: 2 / span 1;
+}
+
+.panelBotRight {
+  grid-column: 3 / span 1;
+}
+
+.media {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.label {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: white;
+  z-index: 2;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Gradients for the bottom panels as placeholders mimicking the images */
+.gradientOrange {
+  background: linear-gradient(135deg, #fcd0a1, #e68e51);
+}
+
+.gradientForest {
+  background: linear-gradient(135deg, #2c3e2d, #5a7d5c);
+}
+
+.gradientRed {
+  background: linear-gradient(135deg, #7c1f10, #3a0d06);
+}
+
+@media (max-width: 768px) {
+  .logoRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .ticketPattern {
+    display: none;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .panelEye, .panelVideo, .panelBotLeft, .panelBotMid, .panelBotRight {
+    grid-column: 1 / span 1;
+    height: 40vh;
+  }
+  .logoCenter h1 {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,196 @@
+/* LensScrollReveal.module.css */
+
+/* ── Section ── 400vh gives plenty of scroll room */
+.section {
+  height: 400vh;
+  position: relative;
+  transition: background 0.3s linear;
+}
+
+/* ── Sticky layer – stays in view for the full scroll ── */
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Background oversized text ── */
+.bgText {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(160px, 28vw, 380px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--blue);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  transition: opacity 0.4s;
+}
+
+/* ── Ripple rings ── */
+.ripples {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+.rippleRing {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 86, 255, 0.15);
+  transition: opacity 0.4s, width 0.4s, height 0.4s;
+}
+
+/* ── Lens container – center of viewport ── */
+.lensContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(280px, 40vw, 520px);
+  height: clamp(280px, 40vw, 520px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Copy area ── */
+.copyArea {
+  position: absolute;
+  left: clamp(24px, 5vw, 80px);
+  bottom: clamp(80px, 12vh, 140px);
+  z-index: 20;
+  max-width: clamp(260px, 35vw, 480px);
+}
+
+.stepCounter {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  margin-bottom: 20px;
+}
+.stepCurrent { color: var(--blue); font-weight: 700; font-size: 14px; }
+.stepSep     { color: var(--text-dim); }
+.stepTotal   { color: var(--text-dim); }
+
+.copyInner {
+  animation: stepEnterKf 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes stepEnterKf {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--deep);
+  margin-bottom: 20px;
+}
+.headLine {
+  display: block;
+  overflow: hidden;
+}
+.headNormal { display: block; }
+.headAccent {
+  display: block;
+  color: var(--blue);
+  font-style: italic;
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+/* ── Progress bar – bottom of viewport ── */
+.progressBar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(26, 86, 255, 0.08);
+  z-index: 30;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.05s linear;
+}
+
+/* ── Step dots – right side ── */
+.stepDots {
+  position: absolute;
+  right: clamp(24px, 5vw, 60px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 30;
+}
+.stepDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-dark);
+  transition: background 0.3s, transform 0.3s;
+}
+.stepDotActive {
+  background: var(--blue);
+  transform: scale(1.6);
+}
+
+/* ── Metrics strip ── */
+.metrics {
+  position: absolute;
+  top: clamp(100px, 14vh, 140px);
+  right: clamp(24px, 5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  z-index: 20;
+  transition: opacity 0.4s;
+}
+.metric {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--blue);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.4s;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .lensContainer { width: clamp(240px, 80vw, 340px); height: clamp(240px, 80vw, 340px); }
+  .copyArea { left: 24px; bottom: 80px; max-width: 85vw; }
+  .metrics  { display: none; }
+  .bgText   { font-size: 30vw; }
+}

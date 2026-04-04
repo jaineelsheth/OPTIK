@@ -1,0 +1,31 @@
+/* Footer.module.css — dark */
+.footer { background:var(--bg-2); border-top:1px solid var(--border);
+  padding:clamp(64px,8vw,96px) clamp(24px,5vw,72px) 0; position:relative; overflow:hidden; }
+.top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:clamp(32px,5vw,64px);
+  padding-bottom:56px; border-bottom:1px solid var(--border); }
+.logo { font-family:var(--font-display); font-size:26px; font-weight:300;
+  letter-spacing:.2em; color:var(--fg); margin-bottom:14px; }
+.tagline { font-size:13px; color:var(--fg-dim); line-height:1.75; max-width:240px; margin-bottom:28px; }
+.socials { display:flex; flex-wrap:wrap; gap:16px; }
+.social { font-family:var(--font-ui); font-size:9px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--fg-dim); text-decoration:none; transition:color .3s; }
+.social:hover { color:var(--blue); }
+.colTitle { font-family:var(--font-ui); font-size:10px; font-weight:600; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--fg-dim); margin-bottom:20px; }
+.colList { list-style:none; display:flex; flex-direction:column; gap:12px; }
+.colLink { font-size:13px; color:var(--fg); text-decoration:none; opacity:.5; transition:opacity .3s,color .3s; position:relative; }
+.colLink::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px;
+  background:var(--blue); transition:width .3s cubic-bezier(.22,1,.36,1); }
+.colLink:hover { opacity:1; color:var(--blue); }
+.colLink:hover::after { width:100%; }
+.bottom { display:flex; justify-content:space-between; align-items:center; padding:24px 0; flex-wrap:wrap; gap:16px; }
+.copy { font-family:var(--font-ui); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--fg-dim); }
+.legal { display:flex; gap:24px; flex-wrap:wrap; }
+.legalLink { font-family:var(--font-ui); font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--fg-dim); text-decoration:none; transition:color .3s; }
+.legalLink:hover { color:var(--blue); }
+.bigWord { font-family:var(--font-display); font-size:clamp(56px,14vw,180px); font-weight:300;
+  color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.04); letter-spacing:.05em;
+  line-height:1; text-align:center; padding:20px 0 0; white-space:nowrap; overflow:hidden; }
+@media(max-width:900px){ .top{grid-template-columns:1fr 1fr;} .brand{grid-column:span 2;} }
+@media(max-width:480px){ .top{grid-template-columns:1fr;} .brand{grid-column:span 1;} }

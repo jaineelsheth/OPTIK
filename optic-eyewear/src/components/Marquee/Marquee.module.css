@@ -1,0 +1,18 @@
+/* Marquee.module.css — dark */
+.wrapper { background:transparent; overflow:hidden; padding:14px 0;
+  display:flex; flex-direction:column; gap:0; }
+.row { overflow:hidden; padding:10px 0;
+  border-top:1px solid var(--border); }
+.row:last-child { border-bottom:1px solid var(--border); }
+.track { display:flex; animation:marqueeLeft 26s linear infinite; white-space:nowrap;
+  will-change:filter; transition:filter 0.15s linear; }
+.reverse { animation:marqueeRight 22s linear infinite; }
+.item {
+  display:inline-flex; align-items:center; gap:20px; padding:0 28px;
+  font-family:var(--font-ui); font-size:11px; font-weight:600;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--fg-dim); flex-shrink:0;
+}
+.item:hover { color:var(--fg); }
+.itemAlt { color:rgba(26,86,255,0.5); }
+.itemAlt:hover { color:var(--blue); }
+.dot { width:4px; height:4px; border-radius:50%; background:rgba(26,86,255,0.4); flex-shrink:0; }

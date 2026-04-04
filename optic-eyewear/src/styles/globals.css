@@ -1,0 +1,343 @@
+/* ═══════════════════════════════════════════════════
+   ŌPTIC v2 — Cinematic Dark Luxury
+   #050505 bg · white text · GSAP · Lenis
+   ═══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #FFFFFF;
+  --bg-2: #F5F5F7;
+  --bg-3: #EAEAEC;
+  --bg-card: #FFFFFF;
+  --fg: #1D1D1F;
+  --fg-dim: rgba(29, 29, 31, 0.6);
+  --fg-muted: rgba(29, 29, 31, 0.3);
+  --blue: #1a56ff;
+  --blue-mid: #0038e0;
+  --blue-dark: #001ea8;
+  --cyan: #00c2ff;
+  --blue-glow: rgba(26, 86, 255, 0.2);
+  --cyan-glow: rgba(0, 194, 255, 0.12);
+  --amber: #c8831a;
+  --amber-mid: #9a6510;
+  --amber-glow: rgba(200, 131, 26, 0.15);
+  --border: rgba(0, 0, 0, 0.07);
+  --border-blue: rgba(26, 86, 255, 0.25);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-ui: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --nav-h: 80px;
+  --section-pad: clamp(100px, 12vw, 160px) clamp(24px, 5vw, 80px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(240, 240, 242, 0.5) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blue);
+}
+
+::selection {
+  background: var(--blue);
+  color: white;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes loaderFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+@keyframes loaderRipple {
+  0% {
+    transform: scale(.7);
+    opacity: .6
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(110%)
+  }
+
+  to {
+    transform: translateY(0)
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes lensFloat {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0px)
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-20px)
+  }
+}
+
+@keyframes spinCW {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes spinCCW {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(-360deg)
+  }
+}
+
+@keyframes pulseBig {
+
+  0%,
+  100% {
+    opacity: .5;
+    transform: scale(1)
+  }
+
+  50% {
+    opacity: .9;
+    transform: scale(1.08)
+  }
+}
+
+@keyframes pulseSmall {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1
+  }
+
+  50% {
+    transform: scale(1.6);
+    opacity: .5
+  }
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 40px rgba(26, 86, 255, .18)) drop-shadow(0 0 80px rgba(0, 194, 255, .07))
+  }
+
+  50% {
+    filter: drop-shadow(0 0 90px rgba(26, 86, 255, .4)) drop-shadow(0 0 160px rgba(0, 194, 255, .2))
+  }
+}
+
+@keyframes marqueeLeft {
+  from {
+    transform: translateX(0)
+  }
+
+  to {
+    transform: translateX(-50%)
+  }
+}
+
+@keyframes marqueeRight {
+  from {
+    transform: translateX(-50%)
+  }
+
+  to {
+    transform: translateX(0)
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(.8);
+    opacity: .7
+  }
+
+  100% {
+    transform: scale(2.4);
+    opacity: 0
+  }
+}
+
+@keyframes caretBounce {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1)
+  }
+
+  50% {
+    opacity: .4;
+    transform: scaleY(.6)
+  }
+}
+
+@keyframes orbitDot {
+
+  0%,
+  100% {
+    opacity: .4
+  }
+
+  50% {
+    opacity: 1
+  }
+}
+
+/* ── REVEAL UTILITIES ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity 1s cubic-bezier(.22, 1, .36, 1), transform 1s cubic-bezier(.22, 1, .36, 1);
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.delay-1 {
+  transition-delay: .1s
+}
+
+.delay-2 {
+  transition-delay: .22s
+}
+
+.delay-3 {
+  transition-delay: .34s
+}
+
+.delay-4 {
+  transition-delay: .46s
+}
+
+.delay-5 {
+  transition-delay: .58s
+}
+
+.delay-6 {
+  transition-delay: .70s
+}
+
+@media(max-width:768px) {
+  :root {
+    --nav-h: 64px
+  }
+}

@@ -1,0 +1,535 @@
+/* CinematicHero.module.css */
+/* ════════════════════════════════════════════════════
+   THE EYE ENGINE — drinksom.eu-inspired scrollytelling
+   4-layer eye: pupil → iris (texture) → sclera → eyelids
+   Cinematic typography with z-axis depth
+   ════════════════════════════════════════════════════ */
+
+/* ── VIEWPORT VIGNETTE ── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(255, 255, 255, 0.3) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ════════════════════════════════
+   THE FIXED EYE
+   stays centered for ALL 5 panels
+   ════════════════════════════════ */
+.eyeWrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(260px, 36vw, 520px);
+  height: clamp(260px, 36vw, 520px);
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform, opacity;
+  overflow: visible;
+}
+
+.irisImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  filter: saturate(1.2) contrast(1.15) brightness(0.85);
+  user-select: none;
+}
+
+/* ════════════════════════════════
+   SCROLL CONTAINER — 500vh
+  /* Hero Container */
+.heroSection {
+  position: relative;
+  background: transparent;
+  width: 100vw;
+  height: 500vh;
+  /* Scrollytelling height */
+  overflow: hidden;
+}
+
+.heroSticky {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-2xl);
+  /* Between nav and hero title */
+}
+
+/* ── PANEL BASE ── */
+.panel1,
+.panel2,
+.panel3,
+.panel4,
+.panel5 {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ════════════════════════════════
+   PANEL 1 — Hero entry (IN FRONT of eye)
+   z-index 10 so text is above the eye
+   ════════════════════════════════ */
+.panel1 {
+  justify-content: center;
+  flex-direction: column;
+  background: transparent;
+  z-index: 2;
+}
+
+/* Giant ghost word in background */
+.bgWord1 {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(120px, 24vw, 340px);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200, 131, 26, 0.04);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+  z-index: 0;
+  user-select: none;
+}
+
+/* Hero text block — GSAP Z-axis zoom-through */
+.heroText {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  transform-origin: center center;
+}
+
+.heroLine {
+  display: block;
+  overflow: hidden;
+  line-height: 0.92;
+}
+
+.heroLineInner {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(80px, 15vw, 260px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--fg);
+  mix-blend-mode: difference;
+  animation: slideUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.heroLine:nth-child(1) .heroLineInner {
+  animation-delay: 0.2s;
+}
+
+.heroLine:nth-child(2) .heroLineInner {
+  animation-delay: 0.38s;
+}
+
+.heroLine:nth-child(3) .heroLineInner {
+  animation-delay: 0.56s;
+}
+
+.heroAccent {
+  color: #c8831a;
+  font-style: italic;
+}
+
+/* Tag */
+.heroTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: #c8831a;
+  position: absolute;
+  top: clamp(100px, 14vh, 140px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  white-space: nowrap;
+  animation: fadeIn 1s ease 1s both;
+}
+
+.tagPulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8831a;
+  animation: pulseSmall 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.heroCta {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  animation: fadeIn 1s ease 1.2s both;
+  white-space: nowrap;
+  margin-top: var(--space-lg);
+  /* Between hero title and CTA */
+}
+
+/* Buttons */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #c8831a;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btnPrimary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #9a6510;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btnPrimary:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btnPrimary:hover {
+  box-shadow: 0 0 40px rgba(200, 131, 26, 0.45);
+  transform: translateY(-2px);
+}
+
+.btnPrimary>* {
+  position: relative;
+  z-index: 1;
+}
+
+.btnGhost {
+  background: none;
+  color: var(--fg);
+  border: 1px solid var(--border);
+  padding: 16px 28px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.btnGhost:hover {
+  border-color: #c8831a;
+  color: #c8831a;
+}
+
+/* Progress line */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+  z-index: 20;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #c8831a, #e8a847);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.06s linear;
+}
+
+/* Scroll hint */
+.scrollHint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  animation: fadeIn 1s ease 2s both;
+}
+
+.scrollHint span {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.scrollCaret {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, #c8831a 40%, transparent);
+  animation: caretBounce 2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+/* ════════════════════════════════
+   PANEL 2 — Text slides LEFT, BEHIND eye
+   ════════════════════════════════ */
+.panel2 {
+  padding: 0 clamp(24px, 5vw, 80px);
+  opacity: 0;
+}
+
+.slideTextLeft {
+  max-width: 420px;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  padding: 24px 0;
+}
+
+.slideTextRight {
+  max-width: 420px;
+  margin-left: auto;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  padding: 24px 0;
+}
+
+.panelLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #c8831a;
+  margin-bottom: 20px;
+}
+
+.panelLabel span {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: #c8831a;
+  flex-shrink: 0;
+}
+
+.panelTitle {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 120px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  mix-blend-mode: difference;
+  margin-bottom: 24px;
+}
+
+.panelTitle em {
+  font-style: italic;
+  color: #c8831a;
+}
+
+.panelDesc {
+  font-size: 14px;
+  color: var(--fg-dim);
+  line-height: 1.85;
+  max-width: 300px;
+}
+
+/* ════════════════════════════════
+   PANEL 3 — Text slides RIGHT, BEHIND eye
+   ════════════════════════════════ */
+.panel3 {
+  padding: 0 clamp(24px, 5vw, 80px);
+  justify-content: flex-end;
+  opacity: 0;
+}
+
+/* ════════════════════════════════
+   PANEL 4 — Stats IN FRONT of eye
+   ════════════════════════════════ */
+.panel4 {
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+}
+
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: absolute;
+  bottom: clamp(60px, 10vh, 100px);
+  backdrop-filter: blur(20px);
+  background: transparent;
+}
+
+.specItem {
+  padding: 32px 28px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.specItem:last-child {
+  border-right: none;
+}
+
+.specItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #c8831a, #e8a847);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.specItem:hover::before {
+  transform: scaleX(1);
+}
+
+.specNum {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 300;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.specNum sup {
+  font-size: 0.45em;
+  color: #c8831a;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.specLabel {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+/* ════════════════════════════════
+   PANEL 5 — Exit panel IN FRONT
+   ════════════════════════════════ */
+.panel5 {
+  flex-direction: column;
+  padding: 0 clamp(24px, 5vw, 80px);
+  opacity: 0;
+}
+
+.exitText {
+  max-width: 600px;
+  backdrop-filter: blur(5px);
+  padding: 24px 0;
+}
+
+.exitTitle {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 10vw, 160px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  color: var(--fg);
+  mix-blend-mode: difference;
+}
+
+.exitTitle em {
+  font-style: italic;
+  color: #c8831a;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .eyeWrap {
+    width: clamp(240px, 72vw, 360px);
+    height: clamp(240px, 72vw, 360px);
+    opacity: 0.5;
+  }
+
+  .heroLineInner {
+    font-size: clamp(56px, 16vw, 100px);
+  }
+
+  .panelTitle {
+    font-size: clamp(40px, 10vw, 72px);
+  }
+
+  .exitTitle {
+    font-size: clamp(48px, 14vw, 100px);
+  }
+
+  .panel2 {
+    background: transparent;
+  }
+
+  .panel3 {
+    background: transparent;
+  }
+
+  .slideTextRight {
+    margin-left: 0;
+  }
+
+  .specsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .specItem:nth-child(2) {
+    border-right: none;
+  }
+
+  .specItem:nth-child(3) {
+    border-top: 1px solid var(--border);
+  }
+
+  .vignette {
+    display: none;
+  }
+}
