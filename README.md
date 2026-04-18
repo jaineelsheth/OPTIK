@@ -58,4 +58,4 @@ The project utilizes a specific set of design tokens to maintain a premium feel:
 
 ---
 
-© 2024 ŌPTIC®. All rights reserved..
+© 2024 ŌPTIC®. All rights reserved.
